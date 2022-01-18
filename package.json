@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "npx lerna run dev --parallel --stream",
+    "build": "npx lerna run build --parallel --stream",
     "format": "npx lerna run format --parallel --stream",
     "lint": "npx lerna run lint --parallel --stream"
   },
