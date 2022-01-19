@@ -1,24 +1,40 @@
 {
-  "name": "flickmeo-back",
+  "name": "back",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "build/app.js",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf build && tsc",
     "dev": "export NODE_ENV=development && nodemon",
     "nodemon": "yarn build && yarn start",
-    "start": "node -r dotenv/config build/index.js",
+    "start": "node -r dotenv/config build/server.js",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint src --ext .ts --fix"
+    "lint": "eslint src --ext .ts --fix",
+    "test": "jest"
   },
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "node-fetch": "^2",
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
     "@types/node": "^17.0.10",
+    "@types/node-fetch": "2",
+    "@types/supertest": "^2.0.11",
+    "@types/uuid": "^8.3.4",
     "dotenv": "^14.2.0",
+    "jest": "^27.4.7",
+    "jest-fetch-mock": "^3.0.3",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0"
   }
 }
