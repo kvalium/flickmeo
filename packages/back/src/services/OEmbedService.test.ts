@@ -1,9 +1,9 @@
 import { OEmbedService } from './OEmbedService';
 import { OEmbedError, OEmbedResult } from '../types/OEmbedResult';
 import { Bookmark } from '../types/Bookmark';
-import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
-
-enableFetchMocks();
+import axios, { AxiosResponse } from 'axios';
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const FAKE_ID = 'FAKE_ID';
 
@@ -13,10 +13,6 @@ const INVALID_LINK = 'https://imgur.com/gallery/O3EIPHp';
 jest.mock('uuid', () => ({ v4: () => FAKE_ID }));
 
 describe('OEmbed service', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-  });
-
   it('throws when no provider found for link', async () => {
     const service = new OEmbedService();
 
@@ -31,7 +27,7 @@ describe('OEmbed service', () => {
   });
 
   it('throws when oEmbed fails or cannot parse', async () => {
-    fetchMock.mockRejectOnce(new Error('404 not found'));
+    mockedAxios.get.mockResolvedValueOnce(setAxiosResponse({}, 404));
 
     const service = new OEmbedService();
 
@@ -39,7 +35,7 @@ describe('OEmbed service', () => {
     try {
       await service.getLinkInfo(VALID_LINK);
     } catch (e) {
-      expect((e as Error).message).toMatch(`404 not found`);
+      expect((e as Error).message).toMatch(`something went wrong`);
     }
   });
 
@@ -51,7 +47,8 @@ describe('OEmbed service', () => {
       id: '1',
       link: null,
     };
-    fetchMock.mockResponseOnce(JSON.stringify(fakeError));
+
+    mockedAxios.get.mockResolvedValueOnce(setAxiosResponse(fakeError));
 
     const service = new OEmbedService();
 
@@ -63,7 +60,7 @@ describe('OEmbed service', () => {
     }
   });
 
-  it.only('map oEmbed result to bookmark', async () => {
+  it('map oEmbed result to bookmark', async () => {
     const fakeOEmbedResult: OEmbedResult = {
       author_name: 'John Doe',
       height: 100,
@@ -76,16 +73,29 @@ describe('OEmbed service', () => {
     };
 
     const expectedBookmark: Bookmark = {
-      id: FAKE_ID,
-      ...fakeOEmbedResult,
-      author: fakeOEmbedResult.author_name,
-      providerName: fakeOEmbedResult.provider_name,
-      addedDate: fakeOEmbedResult.upload_date,
+      addedDate: '2020-08-25 14:35:18',
+      author: 'John Doe',
+      duration: 20,
+      height: 100,
+      id: 'FAKE_ID',
+      providerName: 'Vimeo',
+      title: 'My Test Video',
+      type: 'video',
+      width: 250,
     };
 
-    fetchMock.mockResponseOnce(JSON.stringify(fakeOEmbedResult));
+    mockedAxios.get.mockResolvedValueOnce(setAxiosResponse(fakeOEmbedResult));
 
     const service = new OEmbedService();
-    expect(service.getLinkInfo(VALID_LINK)).resolves.toEqual(expectedBookmark);
+    const data = await service.getLinkInfo(VALID_LINK);
+    expect(data).toEqual(expectedBookmark);
   });
+});
+
+const setAxiosResponse = (data: unknown, status = 200): AxiosResponse => ({
+  data,
+  status,
+  statusText: 'OK',
+  headers: {},
+  config: {},
 });

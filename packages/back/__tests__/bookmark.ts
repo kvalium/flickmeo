@@ -38,7 +38,7 @@ describe('POST /bookmarks', function () {
       .expect('Content-Type', /json/)
       .expect(200, { success: false, error: {} }, done);
   });
-  xit('add a new bookmark', (done) => {
+  it('add a new bookmark', (done) => {
     request(app)
       .post('/bookmarks')
       .set('Accept', 'application/json')

@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import { Bookmark } from '../types/Bookmark';
 import { OEmbedError, OEmbedResult } from '../types/OEmbedResult';
@@ -22,8 +22,7 @@ export class OEmbedService implements LinkInfoServiceInterface {
   };
 
   private fetchOembed = async (providerUrl: string, link: string): Promise<OEmbedResult> => {
-    const fetchJSONResult = await fetch(`${providerUrl}/?url=${link}&format=json`);
-    const result = await fetchJSONResult.json();
+    const { data: result } = await axios.get(`${providerUrl}/?url=${link}&format=json`);
     if (this.isOembedError(result)) {
       throw new Error(result.error);
     }
