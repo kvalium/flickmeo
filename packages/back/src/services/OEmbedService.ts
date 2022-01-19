@@ -9,7 +9,7 @@ export class OEmbedService implements LinkInfoServiceInterface {
   getLinkInfo = async (link: string) => {
     const providerUrl = this.getProviderUrl(link);
     const oEmbedResult = await this.fetchOembed(providerUrl, link);
-    return this.mapToNewBookmark(oEmbedResult);
+    return this.mapToNewBookmark(oEmbedResult, link);
   };
 
   private getProviderUrl = (link: string) => {
@@ -36,8 +36,9 @@ export class OEmbedService implements LinkInfoServiceInterface {
   private isOembedResult = (r: unknown): r is OEmbedResult =>
     (r as OEmbedResult).provider_name !== undefined;
 
-  private mapToNewBookmark = (r: OEmbedResult): Bookmark => ({
+  private mapToNewBookmark = (r: OEmbedResult, link: string): Bookmark => ({
     id: uuid(),
+    url: link,
     height: r.height,
     title: r.title,
     type: r.type,

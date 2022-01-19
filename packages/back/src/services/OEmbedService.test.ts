@@ -74,6 +74,7 @@ describe('OEmbed service', () => {
 
     const expectedBookmark: Bookmark = {
       addedDate: '2020-08-25 14:35:18',
+      url: VALID_LINK,
       author: 'John Doe',
       duration: 20,
       height: 100,

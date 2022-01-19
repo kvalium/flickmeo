@@ -1,5 +1,6 @@
 export type Bookmark = {
   id: string;
+  url: string;
   type: 'video' | 'photo';
   providerName: string;
   title: string;

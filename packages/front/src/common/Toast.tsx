@@ -13,7 +13,7 @@ export const Toast = ({
   type?: AlertColor;
 }) => {
   return (
-    <Snackbar open={true} autoHideDuration={duration}>
+    <Snackbar open={open} autoHideDuration={duration}>
       <Alert severity={type}>{message}</Alert>
     </Snackbar>
   );

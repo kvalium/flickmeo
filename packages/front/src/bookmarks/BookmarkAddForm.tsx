@@ -2,20 +2,18 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRetrieveLinkInfo } from './BookmarksApi';
+import { Toast } from '../common/Toast';
+import { useAddBookmark } from './BookmarksApi';
+// import { useRetrieveLinkInfo } from './BookmarksApi';
 
 export const BookmarkAddForm = () => {
-  const [link, setLink] = useState<string>();
   const { t } = useTranslation();
   const [fieldValue, setFieldValue] = useState<string>();
-  const { isLoading, error, data: result } = useRetrieveLinkInfo(link);
-
-  if (error) {
-    console.log({ error });
-  }
+  const { mutate: addBookmark, isLoading, isError } = useAddBookmark();
 
   return (
     <>
+      <Toast open={isError} message={'error'} />
       <TextField
         onChange={(e) => setFieldValue(e.target.value)}
         fullWidth
@@ -27,7 +25,7 @@ export const BookmarkAddForm = () => {
       <LoadingButton
         loading={isLoading}
         disabled={!fieldValue}
-        onClick={() => setLink(fieldValue)}
+        onClick={() => fieldValue && addBookmark(fieldValue)}
         variant="contained"
         color="success"
       >

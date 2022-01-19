@@ -7,8 +7,8 @@ export const App = () => {
   return (
     <Container maxWidth="lg">
       <Box sx={{ my: 4 }}>
-        <BookmarksList />
         <BookmarkAddForm />
+        <BookmarksList />
       </Box>
     </Container>
   );

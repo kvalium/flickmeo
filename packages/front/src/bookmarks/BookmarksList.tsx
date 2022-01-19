@@ -47,8 +47,8 @@ export const BookmarksList = () => {
         <Column dataField="title" caption={t('title')} dataType="string" />
         <Column dataField="author" caption={t('author')} dataType="string" />
         <Column
-          dataField="dateAdded"
-          caption={t('dateAdded')}
+          dataField="addedDate"
+          caption={t('addedDate')}
           dataType="date"
           defaultSortIndex={0}
           defaultSortOrder="desc"
