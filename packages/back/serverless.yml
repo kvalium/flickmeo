@@ -1,0 +1,24 @@
+service: flickmeo
+
+provider:
+  httpApi:
+    cors: true
+  logs:
+    httpApi: true
+  name: aws
+  runtime: nodejs14.x
+  stage: prod
+  region: eu-west-3
+  memorySize: 256
+  timeout: 30
+  versionFunctions: false
+  environment:
+    NODE_ENV: production
+functions:
+  app:
+    handler: build/index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
+plugins:
+  - serverless-express

@@ -12,7 +12,7 @@ export type Bookmark = {
 };
 
 const BOOKMARKS_QUERY_KEY = 'bookmarks';
-const BACKEND_API = 'http://localhost:8999/bookmarks';
+const BACKEND_API = `${import.meta.env.VITE_BACKEND_URL}/bookmarks`;
 
 export const useBookmarks = () =>
   useQuery<Bookmark[]>(BOOKMARKS_QUERY_KEY, () =>
