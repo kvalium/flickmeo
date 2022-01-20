@@ -2,22 +2,22 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import {
-  BookmarkDummyRepository,
+  InMemoryBookmarkRepository as InMemoryBookmarkRepository,
   BookmarksController as BookmarkController,
   BookmarkService,
   OEmbedService,
 } from './bookmark';
-import { TagController, TagDummyRepository, TagService } from './tag';
+import { TagController, InMemoryTagRepository, TagService } from './tag';
 
 export const app = express();
 
-const dummyBookmarkRepository = new BookmarkDummyRepository();
+const inMemoryBookmarkRepository = new InMemoryBookmarkRepository();
 const oEmbedService = new OEmbedService();
-const bookmarkService = new BookmarkService(dummyBookmarkRepository, oEmbedService);
+const bookmarkService = new BookmarkService(inMemoryBookmarkRepository, oEmbedService);
 const bookmarkController = new BookmarkController(bookmarkService);
 
-const dummyTagRepository = new TagDummyRepository();
-const tagService = new TagService(dummyTagRepository);
+const inMemoryTagRepository = new InMemoryTagRepository();
+const tagService = new TagService(inMemoryTagRepository);
 const tagController = new TagController(tagService);
 
 app.use(cors());

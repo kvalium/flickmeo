@@ -1,6 +1,6 @@
 import { Bookmark, BookmarkRepositoryInterface } from '../domain';
 
-export class BookmarkDummyRepository implements BookmarkRepositoryInterface {
+export class InMemoryBookmarkRepository implements BookmarkRepositoryInterface {
   bookmarks: Bookmark[];
 
   constructor() {

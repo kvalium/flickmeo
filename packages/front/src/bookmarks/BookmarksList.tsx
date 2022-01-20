@@ -3,6 +3,7 @@ import { DataGrid } from 'devextreme-react';
 import {
   Button as DatagridButton,
   Column,
+  Editing,
   FilterRow,
   Pager,
   Paging,
@@ -21,13 +22,10 @@ export const BookmarksList = () => {
   const [showDeleteModal, toggleDeleteModal] = useState(false);
   const [selectedBookmarkId, setSelectedBookmark] = useState<string>('');
 
-  const { isLoading, error, data: bookmarks } = useBookmarks();
+  const { isLoading, isError, data: bookmarks } = useBookmarks();
   const { mutate: deleteBookmark } = useDeleteBookmark();
 
   if (isLoading) return <Loading />;
-  if (!error) {
-    <Toast open={true} type={'error'} message={'an error occurs'} />;
-  }
 
   const BookmarkUrlRender = ({ data }: { data: Bookmark }) => (
     <Link target="_blank" href={data.url}>
@@ -37,12 +35,23 @@ export const BookmarksList = () => {
 
   return (
     <>
-      <DataGrid dataSource={bookmarks} keyExpr="id" rowAlternationEnabled>
+      <Toast
+        open={isError}
+        type="warning"
+        message={t('An error occurs while fetching bookmarks')}
+      />
+      <DataGrid
+        dataSource={bookmarks}
+        keyExpr="id"
+        rowAlternationEnabled
+        onSaved={({ changes: [{ data, key }] }) => console.log({ data, key })}
+      >
         <Column
           dataField="url"
           caption={t('url')}
           dataType="string"
           cellRender={BookmarkUrlRender}
+          allowEditing={false}
         />
         <Column dataField="title" caption={t('title')} dataType="string" />
         <Column dataField="author" caption={t('author')} dataType="string" />
@@ -74,6 +83,7 @@ export const BookmarksList = () => {
         <Paging defaultPageSize={5} />
         <Pager showPageSizeSelector allowedPageSizes={10} />
         <FilterRow visible />
+        <Editing mode="cell" allowUpdating />
       </DataGrid>
 
       <UpdateTagsModal

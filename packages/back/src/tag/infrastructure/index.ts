@@ -1,2 +1,2 @@
-export * from './TagDummyRepository';
+export * from './InMemoryTagRepository';
 export * from './TagService';

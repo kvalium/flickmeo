@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 import { Tag, TagRepositoryInterface } from '../domain';
 
-export class TagDummyRepository implements TagRepositoryInterface {
+export class InMemoryTagRepository implements TagRepositoryInterface {
   tags: Tag[];
   bookmarkTags: Record<string, string[]>;
 

@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Stack } from '@mui/material';
+import { Box, Button, Grid, Modal, Stack } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TagAddForm } from './TagAddForm';
@@ -36,13 +36,10 @@ export const UpdateTagsModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Stack spacing={2}>
+        <Stack spacing={5}>
           <TagAddForm bookmarkId={bookmarkId} />
           <TagsList bookmarkId={bookmarkId} />
-          <div>
-            <Button onClick={onClose}>{t('Cancel')}</Button>
-            <Button onClick={onUpdate}>{t('Update')}</Button>
-          </div>
+          <Button onClick={onClose}>{t('Ok')}</Button>
         </Stack>
       </Box>
     </Modal>
