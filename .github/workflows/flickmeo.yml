@@ -40,6 +40,9 @@ jobs:
         
       - name: Test
         run: yarn test
+
+      - name: Go to back directory
+        run: cd packages/back
         
       - name: serverless deploy
         uses: serverless/github-action@master
