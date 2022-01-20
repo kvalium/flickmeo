@@ -1,14 +1,13 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { App } from './App';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
-const queryClient = new QueryClient();
+import { App } from './App';
 
 test('Link changes the class when hovered', () => {
-  const component = renderer.create(
-    <QueryClientProvider client={queryClient}>
+  render(
+    <QueryClientProvider client={new QueryClient()}>
       <App />
     </QueryClientProvider>
   );
+  expect(screen.getByText('Flickr & Vimeo bookmark manager'));
 });
