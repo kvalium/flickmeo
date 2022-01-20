@@ -1,4 +1,4 @@
-import { Container, Box, Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 import React from 'react';
 import { BookmarkAddForm } from './bookmarks/BookmarkAddForm';
 import { BookmarksList } from './bookmarks/BookmarksList';

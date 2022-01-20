@@ -1,13 +1,9 @@
-import LoadingButton from '@mui/lab/LoadingButton';
-import { CircularProgress, Fab, Grid, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { AddButton } from '../common/AddButton';
 import { Toast } from '../common/Toast';
 import { useAddBookmark } from './BookmarksApi';
-import AddIcon from '@mui/icons-material/Add';
-import { green } from '@mui/material/colors';
-import { Box } from '@mui/system';
-import { AddButton } from '../common/AddButton';
 
 export const BookmarkAddForm = () => {
   const { t } = useTranslation();
