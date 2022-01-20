@@ -18,7 +18,7 @@ export const BookmarkAddForm = () => {
         onChange={(e) => setFieldValue(e.target.value)}
         fullWidth
         id="outlined-basic"
-        label="Outlined"
+        label={t('Vimeo or Flickr link')}
         variant="outlined"
         disabled={isLoading}
       />
