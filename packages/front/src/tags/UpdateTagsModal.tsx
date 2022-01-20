@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Modal, Stack } from '@mui/material';
+import { Box, Button, Modal, Stack } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TagAddForm } from './TagAddForm';
@@ -11,6 +11,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   border: '2px solid #000',
   boxShadow: 24,
+  width: 400,
   p: 4,
   backgroundColor: '#222',
 };
@@ -19,12 +20,10 @@ export const UpdateTagsModal = ({
   show,
   bookmarkId,
   onClose,
-  onUpdate,
 }: {
   show: boolean;
   bookmarkId: string;
   onClose: () => void;
-  onUpdate: () => void;
 }) => {
   const { t } = useTranslation();
 

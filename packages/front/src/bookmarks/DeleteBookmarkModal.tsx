@@ -1,4 +1,4 @@
-import { Box, Modal } from '@mui/material';
+import { Box, Button, Grid, Modal } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,6 +11,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  backgroundColor: '#222',
 };
 
 export const DeleteBookmarkModal = ({
@@ -33,10 +34,14 @@ export const DeleteBookmarkModal = ({
     >
       <Box sx={style}>
         <p>{t('do you really want to delete this item?')}</p>
-        <div>
-          <button onClick={onClose}>{t('Cancel')}</button>
-          <button onClick={onConfirm}>{t('Ok')}</button>
-        </div>
+        <Grid container>
+          <Grid item>
+            <Button onClick={onClose}>{t('Cancel')}</Button>
+          </Grid>
+          <Grid item>
+            <Button onClick={onConfirm}>{t('Ok')}</Button>
+          </Grid>
+        </Grid>
       </Box>
     </Modal>
   );

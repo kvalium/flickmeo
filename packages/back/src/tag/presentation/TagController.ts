@@ -23,6 +23,15 @@ export class TagController {
           res.json({ success: false, error });
         }
       })
+      .put('/', async (req, res) => {
+        try {
+          const { tag } = req.body;
+          const result = await this.tagService.update(tag);
+          res.json({ success: result });
+        } catch (error) {
+          res.json({ success: false, error });
+        }
+      })
       .get('/:bookmarkId', async (req, res) => {
         try {
           const { bookmarkId } = req.params;

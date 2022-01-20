@@ -31,6 +31,19 @@ export const useDeleteBookmark = () => {
     }
   );
 };
+export const useUpdateBookmark = () => {
+  const client = useQueryClient();
+
+  return useMutation(
+    (bookmark: Partial<Bookmark>) =>
+      axios.put(`${BACKEND_API}`, { bookmark }).then(({ data: { success } }) => success),
+    {
+      onSuccess: () => {
+        client.invalidateQueries(BOOKMARKS_QUERY_KEY);
+      },
+    }
+  );
+};
 
 export const useAddBookmark = () => {
   const client = useQueryClient();

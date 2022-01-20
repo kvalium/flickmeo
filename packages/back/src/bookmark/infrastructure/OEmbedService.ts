@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 import { OEmbedResult, OEmbedError } from './OEmbedResult';
-import { oEmbedProviders } from '../../utils/oEmbedProviders';
+import { oEmbedProviders } from '../domain/oEmbedProviders';
 import { LinkInfoServiceInterface, Bookmark } from '../domain';
 
 export class OEmbedService implements LinkInfoServiceInterface {

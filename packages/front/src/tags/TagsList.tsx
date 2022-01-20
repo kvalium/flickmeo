@@ -1,5 +1,5 @@
 import { DataGrid } from 'devextreme-react';
-import { Button, Column, Pager, Paging } from 'devextreme-react/data-grid';
+import { Button, Column, Editing, Pager, Paging } from 'devextreme-react/data-grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../common/Loading';
@@ -27,7 +27,12 @@ export const TagsList = ({ bookmarkId }: { bookmarkId: string }) => {
       <Toast open={isError} type="warning" message={t('An error occurs while fetching tags')} />
       <Toast open={deleteError} type="warning" message={t('An error occurs while deleting tag')} />
       <Toast open={updateError} type="warning" message={t('An error occurs while updating tag')} />
-      <DataGrid dataSource={tags} keyExpr="id">
+      <DataGrid
+        dataSource={tags}
+        keyExpr="id"
+        rowAlternationEnabled
+        onSaved={({ changes: [{ data: tag }] }) => updateTag(tag)}
+      >
         <Column dataField="name" caption={t('name')} dataType="string" />
         <Column caption={t('actions')} type="buttons">
           <Button
@@ -40,6 +45,7 @@ export const TagsList = ({ bookmarkId }: { bookmarkId: string }) => {
         </Column>
         <Paging defaultPageSize={5} />
         <Pager showPageSizeSelector allowedPageSizes={10} />
+        <Editing mode="cell" allowUpdating />
       </DataGrid>
     </>
   );

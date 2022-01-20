@@ -9,7 +9,6 @@ export class TagService implements TagServiceInterface {
   add = (name: string, bookmarkId: string): Promise<boolean> =>
     this.tagRepository.add(name, bookmarkId);
 
-  update = (tagId: string, name: string): Promise<boolean> =>
-    this.tagRepository.update(tagId, name);
+  update = (tag: Tag): Promise<boolean> => this.tagRepository.update(tag);
   delete = (tagId: string): Promise<boolean> => this.tagRepository.delete(tagId);
 }

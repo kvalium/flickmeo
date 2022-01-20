@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../common/Loading';
 import { Toast } from '../common/Toast';
-import { Bookmark, useBookmarks, useDeleteBookmark } from './BookmarksApi';
+import { Bookmark, useBookmarks, useDeleteBookmark, useUpdateBookmark } from './BookmarksApi';
 import { DeleteBookmarkModal } from './DeleteBookmarkModal';
 import { UpdateTagsModal } from '../tags/UpdateTagsModal';
 
@@ -24,6 +24,7 @@ export const BookmarksList = () => {
 
   const { isLoading, isError, data: bookmarks } = useBookmarks();
   const { mutate: deleteBookmark } = useDeleteBookmark();
+  const { mutate: updateBookmark } = useUpdateBookmark();
 
   if (isLoading) return <Loading />;
 
@@ -44,7 +45,7 @@ export const BookmarksList = () => {
         dataSource={bookmarks}
         keyExpr="id"
         rowAlternationEnabled
-        onSaved={({ changes: [{ data, key }] }) => console.log({ data, key })}
+        onSaved={({ changes: [{ data: bookmark }] }) => updateBookmark(bookmark)}
       >
         <Column
           dataField="url"
@@ -90,9 +91,6 @@ export const BookmarksList = () => {
         show={showUpdateModal}
         bookmarkId={selectedBookmarkId || ''}
         onClose={() => toggleUpdateModal(false)}
-        onUpdate={() => {
-          toggleUpdateModal(false);
-        }}
       />
       <DeleteBookmarkModal
         show={showDeleteModal}

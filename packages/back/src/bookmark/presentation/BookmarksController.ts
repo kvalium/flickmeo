@@ -23,6 +23,15 @@ export class BookmarksController {
           res.json({ success: false, error });
         }
       })
+      .put('/', async (req, res) => {
+        try {
+          const { bookmark } = req.body;
+          const result = await this.bookmarkService.update(bookmark);
+          res.json({ success: result });
+        } catch (error) {
+          res.json({ success: false, error });
+        }
+      })
       .get('/', async (_req, res) => {
         try {
           const bookmarks = await this.bookmarkService.getAll();

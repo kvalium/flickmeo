@@ -25,9 +25,9 @@ export class InMemoryTagRepository implements TagRepositoryInterface {
     return Promise.resolve(true);
   };
 
-  update = (tagId: string, name: string): Promise<boolean> => {
-    const TagIndex = this.tags.findIndex((b) => b.id === tagId);
-    this.tags[TagIndex].name = name;
+  update = (tag: Tag): Promise<boolean> => {
+    const TagIndex = this.tags.findIndex((b) => b.id === tag.id);
+    this.tags[TagIndex] = tag;
     return Promise.resolve(true);
   };
 

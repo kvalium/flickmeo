@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 export type Tag = {
@@ -11,7 +10,7 @@ export type Tag = {
 };
 
 const TAGS_QUERY_KEY = 'tags';
-const BACKEND_API = 'http://localhost:8999/tags';
+const BACKEND_API = `${import.meta.env.VITE_BACKEND_URL}/tags`;
 
 export const useTagsByBookmarkId = (bookmarkId: string) =>
   useQuery<Tag[]>([TAGS_QUERY_KEY, bookmarkId], () =>
@@ -20,7 +19,6 @@ export const useTagsByBookmarkId = (bookmarkId: string) =>
 
 export const useSaveTag = (bookmarkId: string) => {
   const client = useQueryClient();
-  const { t } = useTranslation();
 
   return useMutation(
     (name: string) =>
@@ -29,26 +27,18 @@ export const useSaveTag = (bookmarkId: string) => {
       onSuccess: () => {
         client.invalidateQueries([TAGS_QUERY_KEY, bookmarkId]);
       },
-      onError: () => {
-        console.error(t('Error while saving tag affectation'));
-      },
     }
   );
 };
 
 export const useUpdateTag = (bookmarkId: string) => {
   const client = useQueryClient();
-  const { t } = useTranslation();
 
   return useMutation(
-    (payload: { tagId: string; name: string }) =>
-      axios.put(BACKEND_API, payload).then(({ data: { success } }) => success),
+    (tag: Partial<Tag>) => axios.put(BACKEND_API, { tag }).then(({ data: { success } }) => success),
     {
       onSuccess: () => {
         client.invalidateQueries([TAGS_QUERY_KEY, bookmarkId]);
-      },
-      onError: () => {
-        console.error(t('Error while updating this bookmark tag'));
       },
     }
   );

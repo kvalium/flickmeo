@@ -4,7 +4,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { BookmarkAddForm } from './bookmarks/BookmarkAddForm';
 import { BookmarksList } from './bookmarks/BookmarksList';
-import theme from './theme';
 
 export const App = () => {
   const { t } = useTranslation();
