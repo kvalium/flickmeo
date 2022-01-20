@@ -20,26 +20,26 @@ export const useBookmarks = () =>
   );
 
 export const useDeleteBookmark = () => {
-  const queryClient = useQueryClient();
+  const client = useQueryClient();
 
   return useMutation(
     (id: string) => axios.delete(`${BACKEND_API}/${id}`).then(({ data: { success } }) => success),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(BOOKMARKS_QUERY_KEY);
+        client.invalidateQueries(BOOKMARKS_QUERY_KEY);
       },
     }
   );
 };
 
 export const useAddBookmark = () => {
-  const queryClient = useQueryClient();
+  const client = useQueryClient();
 
   return useMutation(
     (link: string) => axios.post(BACKEND_API, { link }).then(({ data: { success } }) => success),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(BOOKMARKS_QUERY_KEY);
+        client.invalidateQueries(BOOKMARKS_QUERY_KEY);
       },
     }
   );

@@ -3,15 +3,20 @@ import { Button, Column, Pager, Paging } from 'devextreme-react/data-grid';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loading } from '../common/Loading';
-import { Tag, useBookmarkTags, useDeleteTag } from './TagsApi';
+import { Tag, useTagsByBookmarkId, useDeleteTag, useUpdateTag } from './TagsApi';
 
 export const TagsList = ({ bookmarkId }: { bookmarkId: string }) => {
   const { t } = useTranslation();
-  const { isLoading, error, data: tags } = useBookmarkTags(bookmarkId);
-  const { mutate: deleteTag } = useDeleteTag();
+  const { isLoading, error, data: tags } = useTagsByBookmarkId(bookmarkId);
+  const {
+    mutate: deleteTag,
+    isLoading: deleteLoading,
+    error: deleteError,
+  } = useDeleteTag(bookmarkId);
+  const { mutate: updateTag } = useUpdateTag(bookmarkId);
 
-  if (isLoading) return <Loading />;
-  if (error) {
+  if (isLoading || deleteLoading) return <Loading />;
+  if (error || deleteError) {
     console.log({ error });
   }
 

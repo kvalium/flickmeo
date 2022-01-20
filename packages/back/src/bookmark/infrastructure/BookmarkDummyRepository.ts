@@ -1,5 +1,4 @@
-import { Bookmark } from '../types/Bookmark';
-import { BookmarkRepositoryInterface } from './BookmarkRepositoryInterface';
+import { Bookmark, BookmarkRepositoryInterface } from '../domain';
 
 export class BookmarkDummyRepository implements BookmarkRepositoryInterface {
   bookmarks: Bookmark[];

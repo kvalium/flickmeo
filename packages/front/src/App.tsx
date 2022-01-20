@@ -1,15 +1,15 @@
-import { Container, Box } from '@mui/material';
+import { Container, Box, Stack } from '@mui/material';
 import React from 'react';
 import { BookmarkAddForm } from './bookmarks/BookmarkAddForm';
 import { BookmarksList } from './bookmarks/BookmarksList';
 
 export const App = () => {
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
+    <Container maxWidth="lg" sx={{ my: 4 }}>
+      <Stack spacing={2}>
         <BookmarkAddForm />
         <BookmarksList />
-      </Box>
+      </Stack>
     </Container>
   );
 };

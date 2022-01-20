@@ -1,7 +1,9 @@
-import { BookmarkRepositoryInterface } from '../repositories/BookmarkRepositoryInterface';
-import { Bookmark } from '../types/Bookmark';
-import { BookmarkServiceInterface } from './BookmarkServiceInterface';
-import { LinkInfoServiceInterface } from './LinkInfoServiceInterface';
+import {
+  Bookmark,
+  BookmarkRepositoryInterface,
+  BookmarkServiceInterface,
+  LinkInfoServiceInterface,
+} from '../domain';
 
 export class BookmarkService implements BookmarkServiceInterface {
   constructor(

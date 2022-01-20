@@ -1,7 +1,7 @@
 import { OEmbedService } from './OEmbedService';
-import { OEmbedError, OEmbedResult } from '../types/OEmbedResult';
-import { Bookmark } from '../types/Bookmark';
 import axios, { AxiosResponse } from 'axios';
+import { OEmbedError, OEmbedResult } from './OEmbedResult';
+import { Bookmark } from '../domain';
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 

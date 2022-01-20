@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
-import { Bookmark } from '../types/Bookmark';
-import { OEmbedError, OEmbedResult } from '../types/OEmbedResult';
-import { oEmbedProviders } from '../utils/oEmbedProviders';
-import { LinkInfoServiceInterface } from './LinkInfoServiceInterface';
+import { OEmbedResult, OEmbedError } from './OEmbedResult';
+import { oEmbedProviders } from '../../utils/oEmbedProviders';
+import { LinkInfoServiceInterface, Bookmark } from '../domain';
 
 export class OEmbedService implements LinkInfoServiceInterface {
   getLinkInfo = async (link: string) => {

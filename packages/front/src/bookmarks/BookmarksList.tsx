@@ -13,7 +13,7 @@ import { Loading } from '../common/Loading';
 import { Toast } from '../common/Toast';
 import { Bookmark, useBookmarks, useDeleteBookmark } from './BookmarksApi';
 import { DeleteBookmarkModal } from './DeleteBookmarkModal';
-import { UpdateBookmarkModal } from './UpdateBookMarkModal';
+import { UpdateTagsModal } from '../tags/UpdateTagsModal';
 
 export const BookmarksList = () => {
   const { t } = useTranslation();
@@ -76,7 +76,7 @@ export const BookmarksList = () => {
         <FilterRow visible />
       </DataGrid>
 
-      <UpdateBookmarkModal
+      <UpdateTagsModal
         show={showUpdateModal}
         bookmarkId={selectedBookmarkId || ''}
         onClose={() => toggleUpdateModal(false)}

@@ -1,4 +1,4 @@
-import { Bookmark } from '../types/Bookmark';
+import { Bookmark } from './Bookmark';
 
 export interface BookmarkRepositoryInterface {
   getAll(): Promise<Bookmark[]>;

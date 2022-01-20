@@ -1,5 +1,5 @@
 import express from 'express';
-import { BookmarkServiceInterface } from '../services/BookmarkServiceInterface';
+import { BookmarkServiceInterface } from '../domain';
 export const bookmarksRouter = express.Router();
 
 export class BookmarksController {
