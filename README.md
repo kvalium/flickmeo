@@ -28,6 +28,7 @@ It will start frontend on port `3000` and backend on port `8999`
 * Unit tests using [Vitest](https://vitest.dev/) framework
 * Data synchronization and caching policy managed by [React Query](https://react-query.tanstack.com/) 
 * Table features (filters, format, cell editing, pagination) managed by [DevExtreme Datagrid](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/)
+* i18n support for both English and French using [i18next](https://react.i18next.com/) 
 
 #### Backend
 
