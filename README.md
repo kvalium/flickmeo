@@ -2,8 +2,6 @@
 
 ## Flickr & Vimeo bookmarks manager
 
-👉👉 https://flickmeo.netlify.app/ 👈👈
-
 ### Development
 
 Clone this repository them run:
